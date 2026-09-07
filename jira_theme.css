@@ -1,0 +1,121 @@
+/* Clean Atlassian Jira UI Design */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --jira-blue: #0052CC;
+  --jira-blue-hover: #0747A6;
+  --jira-blue-subtle: #DEEBFF;
+  --jira-dark: #172B4D;
+  --jira-gray: #5E6C84;
+  --jira-border: #DFE1E6;
+  --jira-bg: #F4F5F7;
+  --jira-card: #FFFFFF;
+  --jira-green-bg: #E3FCEF;
+  --jira-green-text: #006644;
+  --jira-amber-bg: #FFF0B3;
+  --jira-amber-text: #172B4D;
+}
+
+body, .gradio-container {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  background-color: var(--jira-bg) !important;
+  color: var(--jira-dark) !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+}
+
+/* Jira Header */
+.jira-header {
+  background: #0747A6;
+  color: #FFFFFF;
+  padding: 14px 24px;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(9, 30, 66, 0.15);
+}
+
+.jira-header-title {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jira-header-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Jira White Card */
+.jira-card {
+  background: #FFFFFF !important;
+  border: 1px solid var(--jira-border) !important;
+  border-radius: 6px !important;
+  padding: 20px !important;
+  box-shadow: 0 1px 2px rgba(9, 30, 66, 0.08) !important;
+  margin-bottom: 16px !important;
+}
+
+/* Force light Jira style on all input components */
+input, textarea, select, .gr-input, .gr-box {
+  background-color: #FFFFFF !important;
+  color: var(--jira-dark) !important;
+  border: 1px solid var(--jira-border) !important;
+  border-radius: 4px !important;
+  font-family: inherit !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #4C9AFF !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px #DEEBFF !important;
+}
+
+label span {
+  color: var(--jira-gray) !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* Primary Jira Button */
+button.primary, button.gr-button-primary {
+  background: var(--jira-blue) !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  border-radius: 4px !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  box-shadow: none !important;
+}
+
+button.primary:hover, button.gr-button-primary:hover {
+  background: var(--jira-blue-hover) !important;
+}
+
+button.secondary, button.gr-button-secondary {
+  background: #FFFFFF !important;
+  color: var(--jira-dark) !important;
+  border: 1px solid var(--jira-border) !important;
+  font-weight: 500 !important;
+  border-radius: 4px !important;
+}
+
+button.secondary:hover, button.gr-button-secondary:hover {
+  background: #EBECF0 !important;
+}
+
+.gr-panel {
+  background: #FFFFFF !important;
+  border: 1px solid var(--jira-border) !important;
+}
