@@ -56,15 +56,15 @@ body,
   color: var(--ch-text-primary) !important;
 }
 
-.gradio-container .wrap {
+.gradio-container > .main > .wrap,
+.gradio-container > .wrap {
   max-width: 1360px !important;
   padding: 0 20px !important;
   background: transparent !important;
 }
 
 .gradio-container .styler,
-.gradio-container [class*="styler"],
-.gradio-container [class*="wrap"] {
+.gradio-container [class*="styler"] {
   background: transparent !important;
 }
 

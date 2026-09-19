@@ -1,6 +1,25 @@
 import os
 import datetime
 from typing import Dict, Any, List, Tuple
+import gradio_client.utils
+
+# Monkey-patch gradio_client schema parser to handle Pydantic 2.9+ boolean additionalProperties/items schema elements
+_orig_json_schema_to_python_type = gradio_client.utils._json_schema_to_python_type
+
+def _patched_json_schema_to_python_type(schema, defs=None):
+    if isinstance(schema, bool):
+        return "Any"
+    if isinstance(schema, dict):
+        if isinstance(schema.get("additionalProperties"), bool):
+            schema = dict(schema)
+            schema["additionalProperties"] = {}
+        if isinstance(schema.get("items"), bool):
+            schema = dict(schema)
+            schema["items"] = {}
+    return _orig_json_schema_to_python_type(schema, defs)
+
+gradio_client.utils._json_schema_to_python_type = _patched_json_schema_to_python_type
+
 import gradio as gr
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
