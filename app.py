@@ -3,6 +3,7 @@ import datetime
 from typing import Dict, Any, List, Tuple
 import gradio as gr
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from config import (
     CROP_PROFILES,
@@ -562,6 +563,13 @@ with gr.Blocks(title="CropHarvest AI - Harvest Decision Engine", css=CUSTOM_CSS,
 
 # Top-level ASGI FastAPI app for Vercel and production deployments
 app = FastAPI(title="AgriPulse Harvest OS")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app = gr.mount_gradio_app(app, demo, path="/")
 
 if __name__ == "__main__":
