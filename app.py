@@ -579,4 +579,5 @@ app.add_middleware(
 app = gr.mount_gradio_app(app, demo, path="/", allowed_paths=[BASE_DIR])
 
 if __name__ == "__main__":
-    demo.launch(server_name="127.0.0.1", server_port=7860, share=False)
+    port = int(os.environ.get("PORT", 7860))
+    demo.launch(server_name="0.0.0.0", server_port=port, share=False)
