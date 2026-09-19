@@ -2,6 +2,7 @@ import os
 import datetime
 from typing import Dict, Any, List, Tuple
 import gradio as gr
+from fastapi import FastAPI
 
 from config import (
     CROP_PROFILES,
@@ -558,6 +559,10 @@ with gr.Blocks(title="CropHarvest AI - Harvest Decision Engine", css=CUSTOM_CSS,
         inputs=[api_key_input, model_select],
         outputs=[status_text]
     )
+
+# Top-level ASGI FastAPI app for Vercel and production deployments
+app = FastAPI(title="AgriPulse Harvest OS")
+app = gr.mount_gradio_app(app, demo, path="/")
 
 if __name__ == "__main__":
     demo.launch(server_name="127.0.0.1", server_port=7860, share=False)
