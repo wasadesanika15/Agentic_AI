@@ -111,22 +111,21 @@ def create_jira_gdd_plot(analysis_data: Dict[str, Any]) -> go.Figure:
     
     fig = go.Figure()
     
-    # Jira styling color palette
-    jira_blue = "#0052CC"
-    jira_dark = "#172B4D"
-    jira_green = "#36B37E"
-    jira_amber = "#FFAB00"
-    jira_gray = "#6B778C"
-    jira_light_bg = "#FAFBFC"
+    # CropHarvest modern command center palette
+    ch_primary = "#34D399"
+    ch_dark = "#FFFFFF"
+    ch_accent = "#10B981"
+    ch_amber = "#FBBF24"
+    ch_gray = "#9EB5AC"
     
     # Target Threshold Line
     fig.add_hline(
         y=target_gdd,
         line_dash="dash",
-        line_color=jira_green,
-        annotation_text=f"Target GDD: {target_gdd} (Maturity)",
+        line_color=ch_accent,
+        annotation_text=f"Target GDD: {target_gdd} (Peak Quality)",
         annotation_position="top left",
-        annotation_font_color=jira_green,
+        annotation_font_color=ch_primary,
         annotation_font_size=12
     )
     
@@ -136,8 +135,8 @@ def create_jira_gdd_plot(analysis_data: Dict[str, Any]) -> go.Figure:
         y=past_gdd,
         mode='lines+markers',
         name='Accumulated GDD (Past)',
-        line=dict(color=jira_blue, width=3),
-        marker=dict(size=6, color=jira_blue),
+        line=dict(color="#10B981", width=3),
+        marker=dict(size=6, color="#34D399"),
         hovertemplate='Day %{x}: %{y:.1f} GDD<extra></extra>'
     ))
     
@@ -146,8 +145,8 @@ def create_jira_gdd_plot(analysis_data: Dict[str, Any]) -> go.Figure:
         x=future_days,
         y=future_gdd,
         mode='lines',
-        name='Grok AI Forecast Projection',
-        line=dict(color=jira_amber, width=3, dash='dot'),
+        name='AI Projection Trajectory',
+        line=dict(color=ch_amber, width=3, dash='dot'),
         hovertemplate='Forecast Day %{x}: %{y:.1f} GDD<extra></extra>'
     ))
     
@@ -156,56 +155,59 @@ def create_jira_gdd_plot(analysis_data: Dict[str, Any]) -> go.Figure:
     fig.add_vrect(
         x0=max(0, harvest_day - 2),
         x1=harvest_day + 3,
-        fillcolor=jira_green,
-        opacity=0.18,
+        fillcolor="rgba(16, 185, 129, 0.22)",
+        opacity=0.22,
         layer="below",
         line_width=1,
-        line_color=jira_green,
+        line_color="#34D399",
         annotation_text="🎯 Optimal Harvest Window",
         annotation_position="top right",
-        annotation_font_color=jira_green
+        annotation_font_color="#34D399"
     )
     
     # Current Day vertical marker
     fig.add_vline(
         x=days_elapsed,
         line_width=2,
-        line_color=jira_dark,
+        line_color="#FFFFFF",
         annotation_text="Today",
-        annotation_position="bottom right"
+        annotation_position="bottom right",
+        annotation_font_color="#FFFFFF"
     )
     
     fig.update_layout(
         title=dict(
-            text=f"<b>GDD Maturity Trajectory & Forecast</b> • {analysis_data.get('crop_name', 'Crop')}",
-            font=dict(family="Inter, -apple-system, sans-serif", size=15, color=jira_dark)
+            text=f"<b>Growing Degree Days (GDD) Trajectory</b> • {analysis_data.get('crop_name', 'Crop')}",
+            font=dict(family="Outfit, Plus Jakarta Sans, sans-serif", size=15, color="#FFFFFF")
         ),
         xaxis=dict(
-            title="Days from Planting / Bloom",
-            gridcolor="#EBECF0",
-            zerolinecolor="#EBECF0",
+            title=dict(text="Days from Planting / Bloom", font=dict(color="#E6F1EC")),
+            gridcolor="rgba(52, 211, 153, 0.12)",
+            zerolinecolor="rgba(52, 211, 153, 0.12)",
             showline=True,
-            linecolor="#DFE1E6"
+            linecolor="rgba(52, 211, 153, 0.25)",
+            tickfont=dict(color="#9EB5AC")
         ),
         yaxis=dict(
-            title="Cumulative Growing Degree Days (°C-days)",
-            gridcolor="#EBECF0",
-            zerolinecolor="#EBECF0",
+            title=dict(text="Cumulative GDD (°C-days)", font=dict(color="#E6F1EC")),
+            gridcolor="rgba(52, 211, 153, 0.12)",
+            zerolinecolor="rgba(52, 211, 153, 0.12)",
             showline=True,
-            linecolor="#DFE1E6"
+            linecolor="rgba(52, 211, 153, 0.25)",
+            tickfont=dict(color="#9EB5AC")
         ),
-        paper_bgcolor=jira_light_bg,
-        plot_bgcolor="#FFFFFF",
+        paper_bgcolor="#132822",
+        plot_bgcolor="#081512",
         legend=dict(
             orientation="h",
             yanchor="bottom",
             y=1.02,
             xanchor="right",
             x=1,
-            font=dict(size=11)
+            font=dict(family="Plus Jakarta Sans, sans-serif", size=11, color="#A7F3D0")
         ),
-        margin=dict(l=50, r=40, t=60, b=40),
-        height=340
+        margin=dict(l=50, r=40, t=55, b=40),
+        height=320
     )
     
     return fig
