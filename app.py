@@ -17,8 +17,14 @@ from config import (
 from agronomy_engine import simulate_phenology_and_gdd, create_jira_gdd_plot
 from groq_agent import analyze_harvest_with_groq, ask_groq_copilot, get_groq_client
 
-with open("jira_theme.css", "r") as f:
-    CUSTOM_CSS = f.read()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSS_PATH = os.path.join(BASE_DIR, "jira_theme.css")
+
+if os.path.exists(CSS_PATH):
+    with open(CSS_PATH, "r", encoding="utf-8") as f:
+        CUSTOM_CSS = f.read()
+else:
+    CUSTOM_CSS = ""
 
 # Quick presets
 PRESET_DATA = {
